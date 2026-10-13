@@ -1,0 +1,79 @@
+{
+  "node": "worker-a",
+  "pods": {
+    "kind": "PodList",
+    "items": [
+      {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "web-b",
+          "namespace": "default",
+          "labels": {
+            "app": "web"
+          }
+        },
+        "spec": {
+          "nodeName": "worker-a"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Ready",
+              "status": "True"
+            }
+          ]
+        }
+      },
+      {
+        "apiVersion": "v1",
+        "kind": "Pod",
+        "metadata": {
+          "name": "web-a",
+          "namespace": "default",
+          "labels": {
+            "app": "web"
+          }
+        },
+        "spec": {
+          "nodeName": "worker-a"
+        },
+        "status": {
+          "phase": "Running",
+          "conditions": [
+            {
+              "type": "Ready",
+              "status": "True"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "budgets": {
+    "kind": "PodDisruptionBudgetList",
+    "items": [
+      {
+        "apiVersion": "policy/v1",
+        "kind": "PodDisruptionBudget",
+        "metadata": {
+          "name": "web-budget",
+          "namespace": "default",
+          "generation": 2
+        },
+        "spec": {
+          "selector": {
+            "matchLabels": {
+              "app": "web"
+            }
+          }
+        },
+        "status": {
+          "observedGeneration": 2,
+          "disruptionsAllowed": 1
+        }
+      }
+    ]
+  }
+}
