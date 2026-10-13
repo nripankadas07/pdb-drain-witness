@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pdb-drain-witness"
+version = "0.1.0"
+description = "Explain a captured Kubernetes Ready-pod disruption wave and budget blockers."
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [{name = "Nripanka Das"}]
+dependencies = []
+
+[project.scripts]
+pdb-drain-witness = "pdb_drain_witness:main"
+
+[tool.setuptools]
+py-modules = ["pdb_drain_witness"]
